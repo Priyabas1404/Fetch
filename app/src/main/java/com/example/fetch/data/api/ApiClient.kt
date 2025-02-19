@@ -1,5 +1,6 @@
-package com.example.fetch.data.api
+package com.example.fetch.di
 
+import com.example.fetch.data.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

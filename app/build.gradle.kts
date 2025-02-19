@@ -39,6 +39,9 @@ android {
     buildFeatures {
         compose = true
     }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -56,12 +59,12 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     // Hilt dependencies
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
     // Jetpack Compose Hilt integration
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation (libs.squareup.javapoet)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

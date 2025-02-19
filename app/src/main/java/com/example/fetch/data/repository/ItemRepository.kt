@@ -4,8 +4,12 @@ import com.example.fetch.data.api.ApiService
 import com.example.fetch.data.vo.Item
 import javax.inject.Inject
 
-class ItemRepository  @Inject constructor(private val apiService: ApiService) {
+class ItemRepository @Inject constructor(private val apiService: ApiService) {
     suspend fun getItems(): List<Item> {
-        return apiService.getItems()
+        return try {
+            apiService.getItems()
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 }

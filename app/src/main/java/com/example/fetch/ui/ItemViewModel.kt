@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
 class ItemViewModel @Inject constructor(private val repository: ItemRepository) : ViewModel() {
     private val _items = MutableStateFlow<Map<Int, List<Item>>>(emptyMap())
     val items: StateFlow<Map<Int, List<Item>>> get() = _items

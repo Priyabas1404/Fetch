@@ -1,5 +1,5 @@
 [versions]
-activityComposeVersion = "1.5.1"
+
 agp = "8.8.1"
 converterGson = "2.9.0"
 hiltAndroid = "2.50"

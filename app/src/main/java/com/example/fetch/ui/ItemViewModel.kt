@@ -1,12 +1,15 @@
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fetch.data.api.ApiClient
+import com.example.fetch.data.repository.ItemRepository
 import com.example.fetch.data.vo.Item
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ItemViewModel : ViewModel() {
+@HiltViewModel
+class ItemViewModel @Inject constructor(private val repository: ItemRepository) : ViewModel() {
     private val _items = MutableStateFlow<Map<Int, List<Item>>>(emptyMap())
     val items: StateFlow<Map<Int, List<Item>>> get() = _items
 
@@ -17,7 +20,7 @@ class ItemViewModel : ViewModel() {
     private fun fetchItems() {
         viewModelScope.launch {
             try {
-                val rawItems = ApiClient.apiService.getItems()
+                val rawItems = repository.getItems()
 
                 // Filter out items with null or blank name
                 val filteredItems = rawItems.filter { it.name != null }

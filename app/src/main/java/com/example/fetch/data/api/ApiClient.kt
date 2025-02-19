@@ -1,13 +1,30 @@
 package com.example.fetch.data.api
 
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
-object ApiClient {
-    private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://fetch-hiring.s3.amazonaws.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
+    private const val BASE_URL ="https://fetch-hiring.s3.amazonaws.com/"
 
-    val apiService: ApiService = retrofit.create(ApiService::class.java)
+    @Provides
+    @Singleton
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
+    }
 }

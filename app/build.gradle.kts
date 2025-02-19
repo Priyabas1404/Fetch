@@ -61,6 +61,7 @@ dependencies {
 
     // Jetpack Compose Hilt integration
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation (libs.squareup.javapoet)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
